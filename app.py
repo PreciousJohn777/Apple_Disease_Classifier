@@ -28,30 +28,23 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
-
+    # Load and display image
     image = Image.open(uploaded_file)
-
     st.image(image, caption="Uploaded Image", use_container_width=True)
 
-    # Resize image
+    # Preprocess image
     image = image.resize((224, 224))
-
     img_array = np.array(image)
-
-    # Normalize
     img_array = img_array / 255.0
-
-    # Expand dimensions
     img_array = np.expand_dims(img_array, axis=0)
 
     # Predict
     prediction = model.predict(img_array)
+    confidence = float(prediction[0][0])
 
-confidence = prediction[0][0]
-
-if confidence >= 0.5:
-    st.success("Prediction: Rotten Apple")
-    st.write(f"Confidence: {confidence * 100:.2f}%")
-else:
-    st.success("Prediction: Formalin-mixed Apple")
-    st.write(f"Confidence: {(1 - confidence) * 100:.2f}%")
+    if confidence >= 0.5:
+        st.success("Prediction: Rotten Apple")
+        st.write(f"Confidence: {confidence * 100:.2f}%")
+    else:
+        st.success("Prediction: Formalin-mixed Apple")
+        st.write(f"Confidence: {(1 - confidence) * 100:.2f}%")
