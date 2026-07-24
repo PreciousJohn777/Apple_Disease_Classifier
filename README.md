@@ -1,3 +1,14 @@
+---
+title: Apple Disease Classifier
+emoji: 🍎
+colorFrom: green
+colorTo: blue
+sdk: streamlit
+sdk_version: 1.49.0
+app_file: app.py
+pinned: false
+---
+
 # Apple Disease Classification Using CNN
 
 ## CE1 Mini Project
@@ -44,22 +55,6 @@ streamlit run app.py
 
 - Rotten Apple
 - Formalin-mixed Apple
-
-## Project Structure
-
-```
-Apple_Disease_Classifier/
-│
-├── app.py
-├── train_model.py
-├── train_model.ipynb
-├── models/
-│   └── apple_classifier.keras
-├── dataset/
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
 
 ## Author
 
