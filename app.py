@@ -10,27 +10,17 @@ os.makedirs("models", exist_ok=True)
 MODEL_PATH = "models/apple_classifier.keras"
 MODEL_URL = "https://github.com/PreciousJohn777/Apple_Disease_Classifier/releases/download/v1.0.0/apple_classifier.keras"
 
-st.write("Current directory:", os.getcwd())
-st.write("Models folder exists:", os.path.exists("models"))
-st.write("Model exists before download:", os.path.exists(MODEL_PATH))
 
 import os
 import urllib.request
 
 # Download if the file is missing OR if it's just the tiny Git LFS pointer
 if (not os.path.exists(MODEL_PATH)) or os.path.getsize(MODEL_PATH) < 1000000:
-    st.write("Downloading model...")
     try:
         urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
-        st.write("Download successful!")
-        st.write("New model size:", os.path.getsize(MODEL_PATH), "bytes")
     except Exception as e:
-        st.error(f"Download failed: {e}")
+        st.error(f"Failed to download the model: {e}")
         st.stop()
-
-st.write("Model exists:", os.path.exists(MODEL_PATH))
-st.write("Model size:", os.path.getsize(MODEL_PATH), "bytes")
-
 model = tf.keras.models.load_model(MODEL_PATH)
 
 # Class names
