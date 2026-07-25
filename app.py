@@ -1,5 +1,5 @@
 import os
-import gdown
+import urllib.request
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -10,10 +10,10 @@ os.makedirs("models", exist_ok=True)
 
 MODEL_PATH = "models/apple_classifier.keras"
 
-# Download model from Google Drive if it's missing
+# Download model from GitHub Release if it's missing
 if not os.path.exists(MODEL_PATH):
-    url = "https://drive.google.com/uc?id=1OZ6Xb7v0v_QvHpkelLlAiCBnlSNsx3g8"
-    gdown.download(url, MODEL_PATH, quiet=False)
+    MODEL_URL = "https://github.com/PreciousJohn777/Apple_Disease_Classifier/releases/download/v1.0.0/apple_classifier.keras"
+    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
 
 # Load model
 model = tf.keras.models.load_model(MODEL_PATH)
@@ -32,7 +32,6 @@ st.write("- Formalin-mixed Apple")
 
 
 # IMAGE UPLOADER
-# ==========================
 uploaded_file = st.file_uploader(
     "Upload an Apple Image",
     type=["jpg", "jpeg", "png"]
