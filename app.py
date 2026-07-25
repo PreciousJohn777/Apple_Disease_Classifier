@@ -28,7 +28,12 @@ classes = ["Formalin-mixed", "Rotten"]
 
 # PAGE TITLE
 
-st.title("🍎 Apple Disease Classification")
+st.markdown("""
+Upload an image of an apple and the trained deep learning model will classify it as either:
+
+- 🍎 Rotten Apple
+- 🍏 Formalin-mixed Apple
+""")
 st.write("CE1 Mini Project")
 st.write("Classify Apple Images into:")
 st.write("- Rotten Apple")
@@ -63,3 +68,6 @@ if uploaded_file is not None:
         st.success("Prediction: Formalin-mixed Apple")
         st.write(f"Confidence: {(1 - confidence) * 100:.2f}%")
 
+import streamlit as st
+
+st.write("Streamlit version:", st.__version__)
