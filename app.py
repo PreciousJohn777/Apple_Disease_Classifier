@@ -1,11 +1,22 @@
+import os
+import gdown
 import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
 
-# LOAD TRAINED MODEL
+# Create models folder if it doesn't exist
+os.makedirs("models", exist_ok=True)
 
-model = tf.keras.models.load_model("models/apple_classifier.keras")
+MODEL_PATH = "models/apple_classifier.keras"
+
+# Download model from Google Drive if it's missing
+if not os.path.exists(MODEL_PATH):
+    url = "https://drive.google.com/uc?id=1OZ6Xb7v0v_QvHpkelLlAiCBnlSNsx3g8"
+    gdown.download(url, MODEL_PATH, quiet=False)
+
+# Load model
+model = tf.keras.models.load_model(MODEL_PATH)
 
 # Class names
 classes = ["Formalin-mixed", "Rotten"]
