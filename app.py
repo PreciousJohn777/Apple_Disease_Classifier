@@ -48,3 +48,4 @@ if uploaded_file is not None:
     else:
         st.success("Prediction: Formalin-mixed Apple")
         st.write(f"Confidence: {(1 - confidence) * 100:.2f}%")
+

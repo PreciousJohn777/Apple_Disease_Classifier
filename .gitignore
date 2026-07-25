@@ -15,3 +15,8 @@ dataset/
 
 # Windows
 desktop.ini
+
+*.h5
+*.keras
+*.pkl
+*.pb
