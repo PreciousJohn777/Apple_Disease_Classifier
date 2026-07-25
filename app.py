@@ -27,6 +27,13 @@ st.write("Model exists after download:", os.path.exists(MODEL_PATH))
 if not os.path.exists(MODEL_PATH):
     st.stop()
 
+import os
+
+st.write("Model size:", os.path.getsize(MODEL_PATH), "bytes")
+
+with open(MODEL_PATH, "rb") as f:
+    st.write("First 20 bytes:", f.read(20))
+    
 model = tf.keras.models.load_model(MODEL_PATH)
 # Class names
 classes = ["Formalin-mixed", "Rotten"]
