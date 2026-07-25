@@ -17,28 +17,22 @@ st.write("Model exists before download:", os.path.exists(MODEL_PATH))
 import os
 import urllib.request
 
-# Download model if missing OR if it's only a Git LFS pointer
+# Download if the file is missing OR if it's just the tiny Git LFS pointer
 if (not os.path.exists(MODEL_PATH)) or os.path.getsize(MODEL_PATH) < 1000000:
     st.write("Downloading model...")
     try:
         urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
-        st.write("Download successful")
+        st.write("Download successful!")
+        st.write("New model size:", os.path.getsize(MODEL_PATH), "bytes")
     except Exception as e:
         st.error(f"Download failed: {e}")
+        st.stop()
 
-st.write("Model exists after download:", os.path.exists(MODEL_PATH))
+st.write("Model exists:", os.path.exists(MODEL_PATH))
 st.write("Model size:", os.path.getsize(MODEL_PATH), "bytes")
-
-if not os.path.exists(MODEL_PATH):
-    st.stop()
-import os
-
-st.write("Model size:", os.path.getsize(MODEL_PATH), "bytes")
-
-with open(MODEL_PATH, "rb") as f:
-    st.write("First 20 bytes:", f.read(20))
 
 model = tf.keras.models.load_model(MODEL_PATH)
+
 # Class names
 classes = ["Formalin-mixed", "Rotten"]
 
