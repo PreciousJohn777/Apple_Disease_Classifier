@@ -5,22 +5,31 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 
-# Create models folder if it doesn't exist
 os.makedirs("models", exist_ok=True)
 
 MODEL_PATH = "models/apple_classifier.keras"
+MODEL_URL = "https://github.com/PreciousJohn777/Apple_Disease_Classifier/releases/download/v1.0.0/apple_classifier.keras"
 
-# Download model from GitHub Release if it's missing
+st.write("Current directory:", os.getcwd())
+st.write("Models folder exists:", os.path.exists("models"))
+st.write("Model exists before download:", os.path.exists(MODEL_PATH))
+
 if not os.path.exists(MODEL_PATH):
-    MODEL_URL = "https://github.com/PreciousJohn777/Apple_Disease_Classifier/releases/download/v1.0.0/apple_classifier.keras"
-    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+    st.write("Downloading model...")
+    try:
+        urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+        st.write("Download successful")
+    except Exception as e:
+        st.error(f"Download failed: {e}")
 
-# Load model
+st.write("Model exists after download:", os.path.exists(MODEL_PATH))
+
+if not os.path.exists(MODEL_PATH):
+    st.stop()
+
 model = tf.keras.models.load_model(MODEL_PATH)
-
 # Class names
 classes = ["Formalin-mixed", "Rotten"]
-
 
 # PAGE TITLE
 
