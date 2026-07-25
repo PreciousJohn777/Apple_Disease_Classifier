@@ -5,6 +5,8 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 
+st.write("Streamlit version:", st.__version__)
+
 os.makedirs("models", exist_ok=True)
 
 MODEL_PATH = "models/apple_classifier.keras"
@@ -68,6 +70,3 @@ if uploaded_file is not None:
         st.success("Prediction: Formalin-mixed Apple")
         st.write(f"Confidence: {(1 - confidence) * 100:.2f}%")
 
-import streamlit as st
-
-st.write("Streamlit version:", st.__version__)
